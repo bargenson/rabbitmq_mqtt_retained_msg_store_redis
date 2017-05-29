@@ -3,24 +3,7 @@ PROJECT_DESCRIPTION = Retained message store implementation for Redis
 PROJECT_MOD = rabbitmq_mqtt_retained_msg_store_redis
 
 define PROJECT_ENV
-[
-	    {default_user, <<"guest">>},
-	    {default_pass, <<"guest">>},
-	    {ssl_cert_login,false},
-	    {allow_anonymous, true},
-	    {vhost, <<"/">>},
-	    {exchange, <<"amq.topic">>},
-	    {subscription_ttl, 86400000}, %% 24 hours
-	    {retained_message_store, rabbit_mqtt_retained_msg_store_redis},
-	    {prefetch, 10},
-	    {ssl_listeners, []},
-	    {num_ssl_acceptors, 1},
-	    {tcp_listeners, [1883]},
-	    {num_tcp_acceptors, 10},
-	    {tcp_listen_options, [{backlog,   128},
-	                          {nodelay,   true}]},
-	    {proxy_protocol, false}
-	  ]
+[]
 endef
 
 DEPS = rabbit_common rabbit eredis rabbitmq_mqtt
