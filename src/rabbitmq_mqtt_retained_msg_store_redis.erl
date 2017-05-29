@@ -1,6 +1,3 @@
-%% Copyright (c) 2007-2017 Pivotal Software, Inc.
-%% You may use this code for any purpose.
-
 -module(rabbitmq_mqtt_retained_msg_store_redis).
 
 -behaviour(rabbit_mqtt_retained_msg_store).
