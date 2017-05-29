@@ -1,3 +1,7 @@
+.idea
+*.iml
+dump.rdb
+*.dump
 .sw?
 .*.sw?
 *.beam

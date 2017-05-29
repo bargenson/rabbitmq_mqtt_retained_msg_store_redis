@@ -6,7 +6,7 @@ sudo: required
 language: erlang
 notifications:
   email:
-    - alerts@rabbitmq.com
+    - bargenson@gmail.com
 addons:
   apt:
     sources:
@@ -38,7 +38,7 @@ before_script:
   # Solutions one is picked: it's after the kiex installations in $PATH.
   - echo YES | kiex implode
 
-script: make tests
+script: make
 
 cache:
   apt: true
