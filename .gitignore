@@ -3,6 +3,7 @@
 dump.rdb
 *.dump
 .sw?
+*.d
 .*.sw?
 *.beam
 /.erlang.mk/

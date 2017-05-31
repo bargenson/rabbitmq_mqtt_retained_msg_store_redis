@@ -37,9 +37,8 @@ connect_to_redis(VHost) ->
 
 insert(Topic, Message, #store_state{redis_client = Client, key_prefix = Prefix}) ->
     Key = Prefix ++ Topic,
-%%    {mqtt_msg,true,1,"home/garden/fountain",false,2,<<"Coucou">>},
     rabbit_log:info("Inserting message ~p to Redis in key ~p...", [Message, Key]),
-    case catch(eredis:q(Client, ["LPUSH", Key, term_to_binary(Message)])) of
+    case catch(eredis:q(Client, ["SET", Key, term_to_binary(Message)])) of
         {ok, _} -> ok;
         {error, Reason} -> {error, Reason};
         {'EXIT', {timeout, _}} -> {error, timeout}
@@ -48,7 +47,7 @@ insert(Topic, Message, #store_state{redis_client = Client, key_prefix = Prefix})
 lookup(Topic, #store_state{redis_client = Client, key_prefix = Prefix}) ->
     Key = Prefix ++ Topic,
     rabbit_log:info("Getting message from Redis in key ~p...", [Key]),
-    case catch(eredis:q(Client, ["RPOP", Key])) of
+    case catch(eredis:q(Client, ["GET", Key])) of
         {ok, undefined} -> not_found;
         {ok, Message} -> #retained_message{mqtt_msg = binary_to_term(Message), topic = Topic};
         {error, Reason} -> {error, Reason};
